@@ -2,6 +2,15 @@
 
 This repository contains supplemental material for the IJHCS paper Emodash: Supporting Emotion Retrospective Awareness in Online Learning by Mohamed Ezzaouia (University of Lyon, LIRIS), Aurélien Tabard (University of Lyon, LIRIS), Elise Lavoué (IAE Lyon,University of Lyon, LIRIS).
 
+## Links referenced in the paper
+
+- DATA
+[See online demo](http://cscw18-emodash-sub1249.surge.sh/#) > DATA section in the menu.
+- SETUP
+[See online demo](http://cscw18-emodash-sub1249.surge.sh/#) > SETUP section in the menu.
+- STATS
+[See online demo](http://cscw18-emodash-sub1249.surge.sh/#) > STATISTICAL ANALYSIS section in the menu.
+
 ## Abstract
 
 <img src="emodash-overview.jpg" title="Emodash overview with different design explorations"  alt="Emodash overview with different design explorations" style="width: 100%;"/>
