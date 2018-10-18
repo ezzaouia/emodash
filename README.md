@@ -4,7 +4,7 @@ This repository contains supplemental material for the IJHCS paper Emodash: Supp
 
 ## Abstract
 
-<img src="emodash-overview.jpeg" title="Emodash overview with different design explorations"  alt="Emodash overview with different design explorations" style="width: 100%;"/>
+<img src="emodash-overview.jpg" title="Emodash overview with different design explorations"  alt="Emodash overview with different design explorations" style="width: 100%;"/>
 
 **Figure**: Emodash overview with different design explorations.
 
