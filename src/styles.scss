@@ -1,0 +1,400 @@
+body {
+    font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    color: rgba(0, 0, 0, .54);
+    ;
+    background-color: #fff;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+p,
+pre,
+button,
+nav hr {
+    line-height: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+pre {
+    font-size: 0.8rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+.section-body {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    .section-description {
+        text-align: justify;
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+
+div.newline {
+    width: 15%;
+    border: 1px solid black;
+    margin: 0 auto 5px auto;
+}
+
+@mixin column {
+    width: 50vw;
+    height: 100vh;
+    float: left;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+@mixin no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@mixin visu-text-font {
+    font-size: 0.8em;
+    font-weight: 900;
+    text-align: center;
+}
+
+@mixin tooltip {
+    @include visu-text-font;
+    border-radius: 3px;
+    box-shadow: 0 0 5px #999;
+    background-color: #fff;
+    position: absolute;
+    text-align: left;
+    display: none;
+    max-width: 170px;
+    color: #000;
+    padding-bottom: 2px;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+    animation-name: anim-open;
+    animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+    #tip-content {
+        padding: 5px;
+    }
+}
+
+@mixin tip-button ($c) {
+    background-color: $c;
+    border: none;
+    outline: none;
+    overflow: hidden;
+}
+
+$anger: #D50000;
+$fear: #AA00FF;
+$sadness: #00B8D4;
+$contempt: #006064;
+$happiness: #64DD17;
+$surprise: #FF6D00;
+$neutral: #2962FF;
+$disgust: #212121;
+$positive: #64DD17;
+$negative: #D50000;
+$interactions: #dcc96b; // first level overview
+
+
+#radial-col-chart-root {
+    @include no-select();
+    padding-top: 5px;
+    .rect-background,
+    .circle-background {
+        fill: #E0E0E0;
+    }
+    .radial-column-label {
+        @include visu-text-font;
+        font-size: 0.7em;
+        text-anchor: middle;
+        dominant-baseline: middle;
+        text-transform: uppercase;
+    }
+    #radial-col-chart-tooltip {
+        @include tooltip;
+        padding: 5px;
+    }
+    .center-hover-tooltip {
+        display: flex;
+        justify-content: space-between;
+        width: 120px;
+        height: fit-content;
+    }
+    .tip-item {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+#sessions-tl-chart-root {
+    #sessions-tl-chart-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    #sessions-tl-chart-svg {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #sessions-tl-brush-chart-svg {
+        box-shadow: 0 0 5px #999;
+        background-color: #fff;
+        right: 0;
+        position: absolute;
+    }
+    .sessions-tl-chart-progress {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .sessionsnav-polyline,
+    .group-stlc-el-lc-polyline {
+        opacity: 0.3;
+    }
+    .group-stlc-el-lc-polyline-stroke {
+        stroke-width: 1.5;
+    }
+    .group-stlc-el-lc-polyline-label {
+        text-anchor: start;
+        font-size: 0.6em;
+        font-weight: 600;
+        font-style: italic;
+        text-anchor: middle;
+    }
+    .session-date-label,
+    .group-stlc-mbc-el-tl-label {
+        text-anchor: middle;
+        font-size: 0.6em;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        fill: #757575;
+    }
+    .rect-background-area {
+        fill: whitesmoke;
+    }
+    .multiline-chart-y-label {
+        text-anchor: end;
+        font-size: 0.5em;
+        font-weight: 300;
+        font-style: italic;
+    }
+    .sessionsnav-polyline-stroke {
+        stroke-width: 1.5;
+    }
+    .multiline-chart-y-label-mean-pos-val {
+        text-anchor: start;
+        font-size: 0.5em;
+        font-weight: 500;
+        font-style: italic;
+        fill: #64DD17;
+    }
+    .line-emotion {
+        stroke-width: 0.1;
+    }
+    .multiline-chart-y-label-mean-neg-val {
+        text-anchor: end;
+        font-size: 0.5em;
+        font-weight: 500;
+        font-style: italic;
+        fill: #D50000;
+    }
+    .pos-neg-dates-line {
+        position: absolute;
+    }
+}
+.player-chats {
+    stroke: rgb(81, 170, 232);
+    stroke-linecap: round;
+    stroke-width: 8.6;
+    mix-blend-mode: screen;
+    cursor: pointer;
+}
+.player-docs {
+    stroke: #dcc96b;
+    stroke-linecap: round;
+    stroke-width: 8.6;
+    mix-blend-mode: screen;
+    cursor: pointer;
+}
+.player-docs-label,
+.player-chats-label {
+    font-family: FontAwesome;
+    font-size: 10px;
+    fill: #fff
+}
+div.newline {
+    width: 15%;
+    border: 1px solid black;
+    margin: 0 auto 5px auto;
+}
+.report_header_top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    button {
+        font-size: 10px;
+        margin: 0;
+    }
+}
+.report_marker_container {
+    button {
+        min-width: 30px;
+        margin-right: 1px;
+        margin-left: 0;
+    }
+    .comment_container {
+        padding-top: 25px;
+    }
+}
+#player-datasets-tooltip {
+    @include tooltip;
+    z-index: 99;
+    #actions {
+        display: none;
+    }
+}
+.tooltip-button {
+    @include tip-button(#eee);
+    float: right;
+}
+.player-tooltip-overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(60, 62, 58, 0.90);
+    #tip-content {
+        padding: 50px;
+        height: 100%;
+        width: 100%;
+        .tip-img,
+        .tip-video,
+        .tip-pdf {
+            width: 100%;
+            height: 99%;
+        }
+        .tip-audio {
+            width: 100%;
+            height: 50%;
+        }
+    }
+}
+/* player-tooltip-overlay closing cross */
+.player-tooltip-overlay .overlay-close {
+    @include tip-button (#fff);
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 100;
+}
+.overlay-hugeinc {
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: opacity 0.5s, visibility 0s 0.5s;
+    transition: opacity 0.5s, visibility 0s 0.5s;
+}
+.overlay-hugeinc.open {
+    opacity: 1;
+    visibility: visible;
+    -webkit-transition: opacity 0.5s;
+    transition: opacity 0.5s;
+    z-index: 102;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
+    animation-name: anim-open;
+    animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+}
+@keyframes anim-open {
+    0% {
+        opacity: 0;
+        -webkit-transform: scale3d(0, 0, 1);
+        transform: scale3d(0, 0, 1);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+.md-whiteframe-z1 {
+    padding: 5px;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.underline-positive {
+    border-bottom: 3px solid $happiness;
+}
+.underline-negative {
+    border-bottom: 3px solid $anger;
+}
+.underline-anger {
+    border-bottom: 3px solid $anger;
+}
+.underline-happiness {
+    border-bottom: 3px solid $happiness;
+}
+.underline-sadness {
+    border-bottom: 3px solid $sadness;
+}
+.underline-surprise {
+    border-bottom: 3px solid $surprise;
+}
+.underline-neutral {
+    border-bottom: 3px solid $neutral;
+}
+.underline-contempt {
+    border-bottom: 3px solid $contempt;
+}
+.underline-fear {
+    border-bottom: 3px solid $fear;
+}
+.underline-disgust {
+    border-bottom: 3px solid $disgust;
+}
+.underline-interactions {
+    border-bottom: 3px solid $interactions;
+}
+.word-note {
+    border-radius: 50%;
+    background: #eee;
+    padding: 4px;
+    text-align: center;
+}
+
+// added for emodash exp
+.player-seeking {
+    fill: #dcc96b;
+    stroke-width: 2;
+    mix-blend-mode: screen;
+}

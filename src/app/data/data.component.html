@@ -1,0 +1,72 @@
+<div class="section-body">
+    <div>
+        <h3>Data Acquisition</h3>
+        <div class="newline"></div>
+    </div>
+
+    <div>
+        <h5>Emotions classification from video stream</h5>
+        <div style="text-align: left; padding: 0 30px;">
+            <p>
+                The data is fully gathered in authentic and non-intrusive settings. Each session may have one or more archive folder(s) depending
+                on whether or not there were any interruptions during the session, for instance, when a technical problem
+                occurs, connection lost etc.
+            </p>
+            <p>
+                Recording are stored along the session in the Cloud and, once the session is terminated, the recordings are downloaded and
+                processed as illustrated in the figure below to classify emotions from the video. Emotions are then stored
+                in data base.
+            </p>
+            <p>
+                We use Microsoft emotion API from Azure Platform for Emotion classification.
+            </p>
+        </div>
+    </div>
+
+    <div class="img-wrap">
+        <img src="./assets/img/data/data-er.jpg" alt="">
+    </div>
+
+    <div>
+        <ol style="text-align: justify; margin-left: 70px; margin-right: 70px;">
+            <li>
+                <strong>Pre-processing:</strong> mainly to cleanup, alignement and concatenation (if a session has many archives
+                etc.).
+            </li>
+            <li>
+                <strong>Video editing:</strong> as the video stream is recorded using webm (VP8 codec), stacking video streams of
+                learner and tutor side by side result in a video desynchroniztion issues. Converting videos into .mp4 was
+                necessary to fix the issue.
+            </li>
+            <li>
+                <strong>Emotion classification:</strong> once the video is compiled, first frames are extracted, using a fixed sampling,
+                of four frames per second (4FPS) and then a call to MS API is made for each frame to classify the face associate
+                emotions. JSON results are save in data base. Parallel calls to MS API reduced processing time by almost
+                3 times.
+            </li>
+        </ol>
+    </div>
+
+    <div class="img-wrap">
+        <img src="./assets/icons/data-er-exp1.jpg" alt="">
+    </div>
+
+    <div>
+        <p class="section-description">
+            Used tools:
+        </p>
+        <ul style="text-align: left; margin-left: 70px; margin-right: 70px;">
+            <li>
+                FFMPG
+            </li>
+            <li>
+                IMAGEMAGICK
+            </li>
+            <li>
+                ...
+            </li>
+        </ul>
+    </div>
+
+
+</div>

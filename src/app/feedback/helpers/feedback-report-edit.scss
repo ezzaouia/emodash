@@ -1,0 +1,538 @@
+@import './shared';
+.feedback-report-edit {
+    $report-height: 200px;
+    .report_header {
+        position: fixed;
+        background: $speakplus-darklightgray;
+        @include flexbox;
+        @include flex-direction (column);
+        @include justify-content (space-between);
+        width: 100%;
+        min-height: $report-height;
+        top: 60px;
+        z-index: 9;
+        font-size: 16px;
+        color: white;
+        .report_header_top {
+            @include flexbox;
+            @include align-items (center);
+            @include justify-content (space-between);
+            width: 100%;
+        }
+        .audio_player {
+            width: 100%;
+            position: relative;
+            @include flexbox;
+            @include flex-direction (column);
+            $track-width: 800px;
+            #session_track {
+                width: $track-width;
+                margin: 0 auto 50px auto;
+            }
+            .timeline-marker-container {
+                width: $track-width;
+                margin: 30px auto 0 auto;
+                height: 30px;
+                .marker-container {
+                    max-width: 577px;
+                    position: relative;
+                    height: 30px;
+                    margin-left: 47px;
+                    .audioMarker {
+                        &.marker-red {
+                            transform: rotate(180deg);
+                            margin-top: 85px;
+                            z-index: 2;
+                            margin-left: 12px;
+                            .md-sign {
+                                .md-thumb-text {
+                                    transform: scale(-1, -1);
+                                }
+                            }
+                        }
+                        .md-sign {
+                            z-index: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .report_body {
+        margin-top: $report-height + 50px;
+        &.extra_margin_video {
+            margin-top: $report-height + 100px;
+        }
+        padding: 0 20px;
+        .report_edit_synthesis {
+            .synthesis_container {
+                @include flexbox;
+                @include align-items (center);
+                .synthesis-form {
+                    @include flex-grow (1);
+                    margin-right: 30px;
+                    md-input-container {
+                        width: 100%;
+                    }
+                }
+                .synthesis-explanations {
+                    ul {
+                        list-style: initial;
+                        li {
+                            list-style: initial;
+                        }
+                    }
+                }
+            }
+        }
+        .report_edit_instructions {
+            .instructions-container {
+                @include flexbox;
+                @include align-items (center);
+                .instructions-form {
+                    @include flex-grow (1);
+                    margin-right: 30px;
+                    md-input-container {
+                        width: 100%;
+                    }
+                }
+                .synthesis-explanations {
+                    @include flex (1);
+                    ul {
+                        list-style: initial;
+                        li {
+                            list-style: initial;
+                        }
+                    }
+                }
+            }
+        }
+        .report-edit-cta {
+            margin: 30px 0 50px 0;
+            @include flexbox;
+            @include align-items (center);
+            @include justify-content (space-between);
+        }
+    }
+    .report_marker_container {
+        margin-bottom: 30px;
+        .marker-header {
+            @include flexbox;
+            @include flex-direction (row);
+            @include align-items (center);
+            color: white;
+            background-color: $speakplus-black;
+            padding-bottom: 4px;
+            .marker-index {
+                font-weight: bold;
+                font-size: 24px;
+                width: 50px;
+                margin-left: 10px;
+                margin-top: 5px;
+            }
+            .marker-details {
+                @include flex-grow (1);
+                margin-left: 4px;
+                a {
+                    color: white;
+                    margin-left: 48px;
+                    &:hover {
+                        color: #cccccc;
+                    }
+                }
+            }
+        }
+        .marker-evaluation-standalone {
+            button {
+                margin-top: 4px;
+            }
+        }
+        .marker-editable-content {
+            @include flexbox;
+            @include flex-direction (row);
+            @include align-items (flex-start);
+            background: white;
+            .marker-evaluation-container {
+                @include flexbox;
+                @include flex-direction (column);
+                button {
+                    margin-top: 4px;
+                }
+            }
+            .comment_container {
+                @include flexbox;
+                @include flex-direction (column);
+                @include align-items (center);
+                @include flex-grow (1);
+                margin-left: 4px;
+                margin-right: 4px;
+                margin-top: 4px;
+                form {
+                    width: 100%;
+                    md-input-container {
+                        width: 100%;
+                    }
+                }
+                p {
+                    @include align-self (flex-start);
+                }
+            }
+            .audio_comment_container {
+                @include flexbox;
+                @include flex-direction (column);
+                @include align-items (center);
+                margin-top: 4px;
+                .player-btn {
+                    margin-right: 4px;
+                    margin-top: 4px;
+                }
+            }
+        }
+        .marker-timing-container {
+            background-color: white;
+            color: black;
+            @include flexbox;
+            @include flex-direction (row);
+            @include align-items (center);
+            @include justify-content (space-between);
+            padding: 4px;
+            .timing-editor {
+                @include flexbox;
+                @include flex-direction (row);
+                @include align-items (center);
+                @include flex (1);
+                @include justify-content (center);
+                .fa-sign-out,
+                .fa-sign-in {
+                    font-size: 24px;
+                    margin: 0 8px;
+                }
+                .timing-buttons {
+                    @include flexbox;
+                    @include flex-direction (row);
+                    .md-button {
+                        &.md-fab {
+                            z-index: 0;
+                            &.md-mini {
+                                line-height: 20px;
+                                width: 20px;
+                                height: 20px;
+                                min-height: 20px;
+                                padding: 0;
+                            }
+                        }
+                    }
+                }
+                hr {
+                    margin: 0;
+                }
+                .marker-duration {
+                    margin: 0 8px;
+                }
+            }
+        }
+    } //ERROR MESSAGE
+    .report_marker_container {
+        .marker-error-icon {
+            float: left;
+            margin-left: -20px;
+            width: 20px;
+            text-align: center;
+            background: red;
+            color: white;
+            height: 190px;
+        }
+    }
+    .synthesis-error-icon {
+        float: left;
+        margin-left: -20px;
+        width: 20px;
+        text-align: center;
+        background: red;
+        color: white;
+        height: 150px;
+    }
+    .report_error {
+        color: $speakplus-red;
+        font-weight: bold;
+        margin: 0;
+        .fa-exclamation-triangle {
+            margin-right: 8px;
+        }
+        .error_message {
+            font-style: italic;
+        }
+    }
+}
+
+.feedback-report-preview {
+    padding: 0 20px;
+    .report-preview-cta {
+        margin: 30px 0 50px 0;
+        @include flexbox;
+        @include align-items (center);
+        @include justify-content (space-between);
+    }
+}
+
+.feedback-report-view-shared {
+    padding: 20px;
+    margin: 50px auto 50px auto;
+    @include flexbox;
+    @include flex-direction (column);
+    @include justify-content (center);
+    .report_media_container {
+        background: $speakplus-black;
+        color: white;
+        padding: 8px;
+        .video_player {
+            @include flexbox;
+            @include align-items (center);
+            @include flex-direction (column);
+        }
+        .audio_player {
+            width: 100%;
+            position: relative;
+            @include flexbox;
+            @include flex-direction (column);
+            $track-width: 800px;
+            #session_track {
+                width: $track-width;
+                margin: 0 auto 50px auto;
+            }
+            .timeline-marker-container {
+                width: $track-width;
+                margin: 30px auto 0 auto;
+                height: 30px;
+                .marker-container {
+                    max-width: 577px;
+                    position: relative;
+                    height: 30px;
+                    margin-left: 28px;
+                    .audioMarker {
+                        &.marker-red {
+                            transform: rotate(180deg);
+                            margin-top: 85px;
+                            z-index: 2;
+                            margin-left: 10px;
+                            .md-sign {
+                                .md-thumb-text {
+                                    transform: scale(-1, -1);
+                                }
+                            }
+                        }
+                        .md-sign {
+                            z-index: 1;
+                        }
+                    }
+                }
+                hr {
+                    margin: 0;
+                }
+                .marker-duration {
+                    margin: 0 8px;
+                }
+            }
+        }
+    } //ERROR MESSAGE
+    .report_marker_container {
+        .marker-error-icon {
+            float: left;
+            margin-left: -20px;
+            width: 20px;
+            text-align: center;
+            background: red;
+            color: white;
+            height: 190px;
+        }
+    }
+    .synthesis-error-icon {
+        float: left;
+        margin-left: -20px;
+        width: 20px;
+        text-align: center;
+        background: red;
+        color: white;
+        height: 150px;
+    }
+    .report_error {
+        color: $speakplus-red;
+        font-weight: bold;
+        margin: 0;
+        .fa-exclamation-triangle {
+            margin-right: 8px;
+        }
+        .error_message {
+            font-style: italic;
+        }
+    }
+}
+
+.feedback-report-preview {
+    padding: 0 20px;
+    .report-preview-cta {
+        margin: 30px 0 50px 0;
+        @include flexbox;
+        @include align-items (center);
+        @include justify-content (space-between);
+    }
+}
+
+.feedback-report-view-shared {
+    padding: 20px;
+    margin: 50px auto 50px auto;
+    @include flexbox;
+    @include flex-direction (column);
+    @include justify-content (center);
+    .report_audio_container {
+        background: $speakplus-black;
+        color: white;
+        padding: 8px;
+        .audio_player {
+            width: 100%;
+            position: relative;
+            @include flexbox;
+            @include flex-direction (column);
+            $track-width: 800px;
+            #session_track {
+                width: $track-width;
+                margin: 0 auto 30px auto;
+            }
+            .timeline-marker-container {
+                width: $track-width;
+                margin: 30px auto 0 auto;
+                height: 30px;
+                .marker-container {
+                    max-width: 577px;
+                    position: relative;
+                    height: 30px;
+                    margin-left: 28px;
+                    .audioMarker {
+                        .md-sign {
+                            z-index: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .report_marker_container {
+        @include flexbox;
+        @include justify-content (space-between);
+        background: $speakplus-black;
+        @include align-items (center);
+        color: white;
+        padding: 8px;
+        .report_stats_thumbs {
+            font-size: 24px;
+        }
+    }
+    .report_comment_container {
+        .report_comment {
+            margin-bottom: 30px;
+            .report_comment_header {
+                @include flexbox;
+                @include justify-content (space-between);
+                @include align-items (center);
+                background: $speakplus-black;
+                color: white;
+                padding: 8px;
+                h3 {
+                    margin: 0;
+                    @include flexbox;
+                    span {
+                        &.label {
+                            margin-left: 8px;
+                        }
+                    }
+                }
+            }
+            .report_marker_text {
+                padding: 8px;
+                min-height: 20px;
+                @include flexbox;
+                @include align-items (center);
+            }
+        }
+    }
+    .report_synthesis_container {
+        p {
+            background: $speakplus-gray;
+            padding: 8px;
+            font-size: 16px;
+        }
+    }
+    .report_instruction_container {
+        p {
+            background: $speakplus-gray;
+            padding: 8px;
+            font-size: 16px;
+        }
+    }
+}
+
+.feedback-report-popup-window {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.audio-comment-popup {
+    padding: 16px;
+    .audio_title {
+        @include flexbox;
+        @include justify-content (center);
+        .close {
+            position: absolute;
+            right: 0;
+        }
+    }
+    .marker_details_container {
+        .marker_details {
+            @include flexbox;
+            @include flex-direction (column);
+            @include align-items (center);
+        }
+        .marker_details_content {
+            @include flexbox;
+            @include flex-direction (row);
+            @include align-items (center);
+            margin-bottom: 16px;
+            .display-index {
+                font-size: 18px;
+                font-weight: bold;
+                margin-right: 8px;
+            }
+            .label {
+                font-size: 18px;
+            }
+            p {
+                @include flexbox;
+                @include flex-grow (1);
+                margin-left: 8px;
+            }
+        }
+        .audio-container {
+            @include flexbox;
+            @include flex-direction (column);
+            align-items: center;
+        }
+        .validation-buttons {
+            @include flexbox;
+            @include justify-content (space-between);
+            width: 100%;
+        }
+    }
+}
+
+.browser-Firefox {
+    .feedback-report-edit {
+        .report_header {
+            .audio_player {
+                .timeline-marker-container {
+                    .marker-container {
+                        max-width: 640px;
+                    }
+                }
+            }
+        }
+    }
+}

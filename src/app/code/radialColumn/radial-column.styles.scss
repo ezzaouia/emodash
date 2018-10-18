@@ -1,0 +1,28 @@
+@import '../../../styles.scss';
+.radial-col-chart {
+    @include no-select();
+    padding-top: 5px;
+    .rect-background,
+    .circle-background {
+        fill: #E0E0E0;
+    }
+    &-sg-label {
+        @include visu-text-font;
+        font-size: 10px;
+        font-weight: 400;
+        text-anchor: middle;
+        dominant-baseline: middle;
+        text-transform: uppercase;
+    }
+    &-tooltip {
+        @include tooltip;
+        padding: 5px;
+        z-index: 99;
+    }
+    &-center-tooltip {
+        display: flex;
+        justify-content: space-between;
+        width: 100px;
+        line-height: 13px;
+    }
+}

@@ -1,0 +1,36 @@
+##
+# @author: @Med'eZ
+#
+
+# Application config
+# -------------------
+app:
+  app_name: emodash
+  title: emotionify
+  template: src/index.html
+  src_folder: src
+  description: ''
+  main_file: main.js
+  vendors_file: vendors.browser.js
+
+# Build & Bundle config
+# -------------------
+build:
+  dist_folder: dist
+  assets_folder: src/assets
+  dist_assets_folder: dist/assets
+  js_bundle_name: bundle.js
+
+# Env config
+# -------------------
+env:
+  dev: &dev
+    host: localhost
+    port: 3003
+
+  prod:
+    <<: *dev
+
+  test:
+    <<: *dev
+

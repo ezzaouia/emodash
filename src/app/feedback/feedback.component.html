@@ -1,0 +1,463 @@
+<div id="abfe-container" data-ng-controller="FeedbackReportEditController">
+
+    <section class="abfe-feedback feedback-report-edit">
+
+        <div layout="column" layout-align="center center" data-ng-hide="true">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+            <p>{{'TR_45'| translate}}</p>
+        </div>
+
+        <div data-ng-show="true">
+
+            <div class="hack_report_body" data-ng-class="{'extra_margin_video' : session_video}">
+                <!-- increase top margin when video button is shown -->
+
+                <div class="flex-item-header">
+                    <h3>
+                        <span data-translate="TR_56" translate-value-strongstart="<strong>" translate-value-strongend="</strong>"></span>
+                    </h3>
+                    <div class="newline"></div>
+                </div>
+
+                <alert type="danger" data-ng-show="bValidationError">
+                    <span class="fa fa-exclamation-triangle"></span> {{'TR_79'| translate}}</alert>
+
+                <div class="report_edit_synthesis">
+
+                    <h4>{{'TR_62'| translate | uppercase}}</h4>
+
+                    <div class="synthesis_container">
+                        <div class="hack-error-icon" data-ng-show="bSynthesisError">
+                            <span class="fa fa-exclamation-triangle"></span>
+                        </div>
+
+                        <div class="synthesis-form">
+                            <md-input-container>
+                                <!--                TODO FIXME: fix replace planned by slot or real start of session-->
+                                <label>{{'TR_63'| translate:{'date':(report.planned| date:'shortDate') ,'learner': learner.displayName}
+                                    }}
+                                </label>
+                                <textarea required maxlength="{{CONSTANTS.session_report_synthesis_max_length}}" data-md-maxlength="{{CONSTANTS.session_report_synthesis_max_length}}"
+                                    data-ng-blur="onSynthesisChange()" data-ng-model="report_fields.synthesis" data-ng-disabled="markerTimingEdited">
+                                    </textarea>
+                                <p data-ng-show="bSynthesisError" class="report_error">&#8227;&nbsp;
+                                    <span class="error_message">{{'TR_78'| translate}}</span>
+                                </p>
+                            </md-input-container>
+                        </div>
+
+                        <div class="synthesis-explanations">
+                            <p>
+                                <strong translate>TR_64</strong>
+                            </p>
+                            <ul>
+                                <li>{{'TR_65'| translate}}</li>
+                                <li>{{'TR_66'| translate}}</li>
+                                <li>{{'TR_67'| translate}}</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Note : Don't use ng-if or filtering otherwise DOM creation is slow -->
+                <div data-ng-repeat="marker in markers" data-ng-show="marker.obj.selected || !bOnlyReportMarkers" class="report_marker_container md-whiteframe-z1">
+                    <div class="hack-marker-error-icon" data-ng-show="marker.error">
+                        <span class="fa fa-exclamation-triangle"></span>
+                    </div>
+
+                    <div class="marker-header">
+                        <span class="marker-index">{{marker.playerData.text}}</span>
+
+                        <md-button class="md-raised md-default-theme" data-ng-click="listenToMarker(marker)" aria-label="Play" data-ng-disabled="(playingMarker && (playingMarker.obj._id === marker.obj._id)) || markerTimingEdited"
+                            data-ng-hide="(playingMarker && (playingMarker.obj._id === marker.obj._id)) || marker.timingEditionVars">
+                            <span class="fa fa-play"></span>
+                        </md-button>
+
+                        <md-button class="md-raised md-warn" aria-label="Stop" data-ng-click="stopListeningToMarker(marker)" data-ng-disabled="(!playingMarker || (playingMarker.obj._id !== marker.obj._id)) || markerTimingEdited"
+                            data-ng-hide="(!playingMarker || (playingMarker.obj._id !== marker.obj._id)) || marker.timingEditionVars">
+                            <span class="fa fa-stop"></span>
+                        </md-button>
+
+                        <span class="marker-details" data-ng-show="!marker.timingEditionVars">
+                            <strong>
+                                <span data-ng-hide="(playingMarker && (playingMarker.obj._id === marker.obj._id))">{{'TR_51'| translate}}</span>
+                                <span data-ng-hide="(!playingMarker || (playingMarker.obj._id !== marker.obj._id))">{{'TR_53'| translate}}</span>
+                            </strong>
+                            <span>{{marker.obj.start| secondsdisplay}} - {{marker.obj.stop| secondsdisplay}}</span>
+                            <span data-ng-show="marker.obj.selected && !markerTimingEdited">
+                                <a href="" data-ng-click="editMarkerTiming(marker)">{{'TR_268'|translate}}
+                                    <span class="fa fa-chevron-right"></span>
+                                </a>
+                            </span>
+                        </span>
+
+                        <span class="marker-details" data-ng-show="marker.timingEditionVars">
+                            <!-- Empty span to make sure add/remove buttons stay on the right due to our flexgrow -->
+                        </span>
+
+                        <md-button class="md-raised md-primary marker_header_right" data-ng-click="addToReport(marker)" data-ng-hide="marker.obj.selected"
+                            data-ng-disabled="marker.obj.selected || (nbSelectedMarkers >= nbMarkersMax) || markerTimingEdited">
+                            {{'TR_54'| translate | uppercase}}
+                            <span class="fa fa-chevron-right"></span>
+                        </md-button>
+                        <md-button class="md-border md-warn marker_header_right" data-ng-click="removeFromReport(marker)" data-ng-hide="!marker.obj.selected"
+                            data-ng-disabled="!marker.obj.selected || markerTimingEdited">
+                            {{'TR_55'| translate | uppercase}}
+                        </md-button>
+                    </div>
+
+                    <div data-ng-show="!marker.obj.selected" class="marker-evaluation-standalone">
+                        <md-button data-ng-show="(marker.obj.type === CONSTANTS.session_marker_type.POSITIVE)" data-ng-disabled="true" aria-label="Positive Marker"
+                            class="md-raised md-accent">
+                            <span class="fa fa-thumbs-up"></span>
+                        </md-button>
+                        <md-button data-ng-show="(marker.obj.type === CONSTANTS.session_marker_type.NEGATIVE)" aria-label="Negative Marker" data-ng-disabled="true"
+                            class="md-raised md-warn">
+                            <span class="fa fa-thumbs-down"></span>
+                        </md-button>
+                    </div>
+
+                    <div data-ng-show="marker.timingEditionVars" class="marker-timing-container">
+                        <md-button class="md-raised md-accent" data-ng-click="listenToMarker(marker)" aria-label="Play" data-ng-disabled="(playingMarker && (playingMarker.obj._id === marker.obj._id))"
+                            data-ng-hide="(playingMarker && (playingMarker.obj._id === marker.obj._id))">
+                            <span class="fa fa-play"></span>
+                        </md-button>
+                        <md-button class="md-raised md-warn" data-ng-click="stopListeningToMarker(marker)" aria-label="Stop" data-ng-disabled="(!playingMarker || (playingMarker.obj._id !== marker.obj._id))"
+                            data-ng-hide="(!playingMarker || (playingMarker.obj._id !== marker.obj._id))">
+                            <span class="fa fa-stop"></span>
+                        </md-button>
+
+                        <div class="timing-editor">
+                            <div class="timing-buttons">
+                                <md-button href="" class="md-mini md-fab" aria-label="Minus time" data-ng-click="reduceMarkerStart(marker)">
+                                    <span class="fa fa-minus-circle"></span>
+                                </md-button>
+                                <md-button href="" class="md-mini md-fab" aria-label="Plus time" data-ng-click="increaseMarkerStart(marker)">
+                                    <span class="fa fa-plus-circle"></span>
+                                </md-button>
+                            </div>
+
+                            <span>{{marker.timingEditionVars.start| secondsdisplay}}</span>
+
+                            <span class="fa fa-sign-out right-icon left-icon"></span>
+
+                            <hr/>
+
+                            <span class="marker-duration">{{(marker.timingEditionVars.stop - marker.timingEditionVars.start)| secondsdisplay}}</span>
+
+                            <hr/>
+
+                            <span class="fa fa-sign-in right-icon left-icon"></span>
+
+                            <span>{{marker.timingEditionVars.stop| secondsdisplay}}</span>
+
+                            <div class="timing-buttons">
+                                <md-button class="md-mini md-fab" href="" aria-label="Minus time" data-ng-click="reduceMarkerStop(marker)">
+                                    <span class="fa fa-minus-circle"></span>
+                                </md-button>
+                                <md-button class="md-mini md-fab" href="" aria-label="Plus time" data-ng-click="increaseMarkerStop(marker)">
+                                    <span class="fa fa-plus-circle"></span>
+                                </md-button>
+                            </div>
+                        </div>
+
+                        <div class="validation-buttons">
+                            <md-button class="md-raised md-primary" aria-label="Validate timing marker" data-ng-click="timingValidate(marker)">
+                                <span class="fa fa-check"></span>
+                            </md-button>
+                            <md-button class="md-border md-warn" aria-label="Cancel timing marker" data-ng-click="timingCancel(marker)">
+                                <span class="fa fa-times"></span>
+                            </md-button>
+                        </div>
+                    </div>
+
+                    <div data-ng-show="marker.obj.selected" class="marker-editable-content">
+                        <div class="marker-evaluation-container">
+                            <md-button class="md-raised md-default-theme {{(marker.obj.type === CONSTANTS.session_marker_type.POSITIVE)? 'md-accent':''}}"
+                                aria-label="Posititive Marker" data-ng-disabled="markerTimingEdited">
+                                <span class="fa fa-thumbs-up"></span>
+                                <md-tooltip md-direction="bottom">
+                                    Disabled
+                                </md-tooltip>
+                            </md-button>
+
+                            <!--data-ng-click="makeNegative(marker)" data-ng-click="makePositive(marker)"  -->
+                            <md-button class="md-raised md-default-theme {{(marker.obj.type === CONSTANTS.session_marker_type.NEGATIVE)? 'md-warn':''}}"
+                                aria-label="Negative Marker" data-ng-disabled="markerTimingEdited">
+                                <span class="fa fa-thumbs-down"></span>
+                                <md-tooltip md-direction="bottom">
+                                    Disabled
+                                </md-tooltip>
+                            </md-button>
+                        </div>
+
+                        <div class="comment_container">
+                            <form name="comment_form" novalidate data-ng-show="marker.obj.selected">
+                                <md-input-container>
+                                    <label>{{'TR_59'| translate:{maxlength: CONSTANTS.session_report_marker_comment_max_length}
+                                        }}
+                                    </label>
+                                    <textarea data-ng-disabled="!marker.obj.selected || markerTimingEdited" name="comment_text" class="marker-comment-text" maxlength="{{CONSTANTS.session_report_marker_comment_max_length}}"
+                                        data-md-maxlength="{{CONSTANTS.session_report_marker_comment_max_length}}" data-ng-blur="onMarkerCommentChange(marker)"
+                                        data-ng-model="marker.obj.learner_text">                  
+                                        </textarea>
+                                </md-input-container>
+                            </form>
+                            <!--                        <p data-ng-show="marker.obj.selected">{{marker.obj.learner_text.length|| 0}} / {{CONSTANTS.session_report_marker_comment_max_length}}</p>-->
+                        </div>
+                        <div class="audio_comment_container">
+                            <single-button-audio-player data-ng-show="marker.obj.audio_comment.s3.url" data-audio-src="marker.obj.audio_comment.s3.url"
+                                data-button-class="md-default-theme md-raised md-button player-btn" data-button-playing-class="md-warn"
+                                data-button-not-playing-class="" data-ng-disabled="markerTimingEdited">
+                                <span data-ng-show="!bPlaying">
+                                    <span class="fa fa-play"></span> {{'TR_229'| translate| uppercase}}</span>
+                                <span data-ng-show="bPlaying">
+                                    <span class="fa fa-stop"></span> {{'TR_228'| translate | uppercase}}</span>
+                            </single-button-audio-player>
+                            <!-- data-ng-click="addAudioComment(marker, $index, $event)" -->
+                            <md-button class="md-raised md-accent marker_header_right" data-ng-disabled="markerTimingEdited">
+                                <md-tooltip md-direction="bottom">
+                                    Disabled
+                                </md-tooltip>
+                                <span data-ng-if="!marker.obj.audio_comment">
+                                    <span class="fa fa-microphone"></span> {{'TR_219'| translate | uppercase}}</span>
+                                <span data-ng-if="marker.obj.audio_comment">
+                                    <span class="fa fa-microphone"></span> {{'emodash.html.label.btn.update.record' | translate | uppercase}}</span>
+                            </md-button>
+                            <p data-ng-hide="marker.obj.audio_comment">{{'TR_220'| translate}}</p>
+                        </div>
+                    </div>
+                    <p data-ng-show="marker.error" class="report_error">&#8227;&nbsp;
+                        <span class="error_message">{{'TR_77'| translate}}</span>
+                    </p>
+                </div>
+
+                <div class="report_edit_instructions">
+
+                    <h4>{{'TR_68'| translate | uppercase}}</h4>
+
+                    <div class="instructions-container">
+                        <form novalidate class="instructions-form">
+                            <div class="hack-error-icon" data-ng-show="bInstructionsError">
+                                <span class="fa fa-exclamation-triangle"></span>
+                            </div>
+
+                            <md-input-container>
+                                <textarea required maxlength="{{CONSTANTS.session_report_instructions_max_length}}" data-md-maxlength="{{CONSTANTS.session_report_instructions_max_length}}"
+                                    data-ng-blur="onInstructionsChange()" data-ng-model="report_fields.instructions" data-ng-disabled="markerTimingEdited">
+                                    </textarea>
+                                <p data-ng-show="bInstructionsError" class="report_error">&#8227;&nbsp;
+                                    <span class="error_message">{{'TR_78'| translate}}</span>
+                                </p>
+                            </md-input-container>
+
+
+                        </form>
+                        <div class="synthesis-explanations">
+                            <p>
+                                <strong translate>TR_69</strong>
+                            </p>
+                            <ul>
+                                <li>{{'TR_70'| translate}}</li>
+                                <li>{{'TR_71'| translate}}</li>
+                                <li>{{'TR_72'| translate}}</li>
+                                <li>{{'TR_73'| translate}}</li>
+                                <li>{{'TR_74'| translate}}</li>
+                                <li>{{'TR_75'| translate}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="report-edit-cta">
+                    <md-button class="md-border md-primary report_edit_later_button" data-ng-click="goHome()" data-ng-disabled="markerTimingEdited">
+                        <span class="fa fa-chevron-left"></span> {{'TR_110'| translate | uppercase}}
+                    </md-button>
+                    <!--  data-ng-click="validateReport()"  -->
+                    <md-button class="md-raised md-primary report_edit_preview_button" data-ng-disabled="markerTimingEdited">{{'TR_76'| translate | uppercase}}
+                        <md-tooltip md-direction="bottom">
+                            Disabled
+                        </md-tooltip>
+                        <span class="fa fa-chevron-right"></span>
+                    </md-button>
+                </div>
+                <div class="clearBoth"></div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="abfe-emodash">
+        <div data-ng-controller="EmodashController as emodashCtrl">
+            <div class="md-whiteframe-z1 flex-item-dash-overview">
+                <div class="flex-item-header">
+                    <h3>
+                        <span>{{'emodash.html.section.overview.label.title' | translate | capitalize}}</span>
+                    </h3>
+                    <div class="newline"></div>
+
+                    <div class="subheader">
+                        <span>{{'emodash.html.section.overview.text.description.2' | translate}}</span>
+                        <span class="underline-positive">{{'emodash.html.label.positive' | translate}}</span> /
+                        <span class="underline-negative">{{'emodash.html.label.negative' | translate }}</span>
+                        <span>{{'emodash.html.section.overview.text.description.3' | translate }}</span>
+                        <span class="underline-happiness">{{'emodash.html.label.happiness' | translate }}</span> /
+                        <span class="underline-surprise">{{'emodash.html.label.surprise' | translate}}</span> /
+                        <span class="underline-fear">{{'emodash.html.label.fear' | translate }}</span> /
+                        <span class="underline-anger">{{'emodash.html.label.anger' | translate }}</span> /
+                        <span class="underline-disgust">{{'emodash.html.label.disgust' | translate }}</span> /
+                        <span class="underline-sadness">{{'emodash.html.label.sadness' | translate }}</span> /
+                        <span class="underline-contempt">{{'emodash.html.label.contempt' | translate }}</span> /
+                        <span class="underline-neutral">{{'emodash.html.label.neutral' | translate }}</span>
+                    </div>
+                </div>
+
+                <div class="flex-item">
+                    <div>
+                        <div class="user-card">
+                            <div class="user-card-media">
+                                <div class="user-photo">
+                                    <img ng-if="learner.user.profilePicture.url" ng-src="{{learner.user.profilePicture.url}}" />
+                                    <md-icon ng-if="!learner.user.profilePicture.url" md-svg-src="assets/icons/round-person-24px.svg"></md-icon>
+                                </div>
+                                <div class="header" style="padding: 0px">Annette</div>
+                            </div>
+                            <div class="user-card-detail">
+                                {{emodashCtrl.learningObjective | capitalize}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <radial-col-chart data="emodashCtrl.balanceChartData" options="emodashCtrl.balanceChartDataOptions"></radial-col-chart>
+                    </div>
+
+                    <div>
+                        <radial-col-chart data="emodashCtrl.radialColChartData" options="emodashCtrl.radialColChartDataOptions"></radial-col-chart>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md-whiteframe-z1 flex-item-dash-sessions-timeline">
+                <div class="flex-item-header">
+                    <h3>
+                        <span>{{'emodash.html.section.sessionstimeline.label.title' | translate | capitalize}}</span>
+                    </h3>
+                    <div class="newline"></div>
+
+                    <div class="subheader">
+                        <span>{{'emodash.html.section.sessionstimeline.text.description.1' | translate }}</span>
+                        <span class="underline-positive">{{'emodash.html.label.positif' | translate}}</span>
+                        <span class="word-note">VS</span>
+                        <span class="underline-negative">{{'emodash.html.label.negatif' | translate }}</span>
+                        <span>{{'emodash.html.section.sessionstimeline.text.description.2' | translate }}</span>
+                    </div>
+                </div>
+                <div class="flex-item">
+                    <sessions-timeline-chart data="emodashCtrl.sessionsTlData" options=""></sessions-timeline-chart>
+                </div>
+            </div>
+
+            <div class="md-whiteframe-z1 flex-item-dash-session-detail">
+                <div class="flex-item-header">
+                    <h3>
+                        <md-button data-ng-click="emodashCtrl.previous()" class="md-fab md-primary md-mini" style="background-color: #555" aria-label="play_neg">
+                            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                        </md-button>
+
+                        <span>{{'emodash.html.section.sessiontimeline.label.title' | translate | capitalize}}</span>
+
+                        <md-button data-ng-click="emodashCtrl.next()" class="md-fab md-primary md-mini" style="background-color: #555" aria-label="play_neg">
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                        </md-button>
+                    </h3>
+                    <div class="newline"></div>
+
+                    <div class="subheader">
+                        <span>
+                            Session N° {{ emodashCtrl.currentSessionId + 1}}, {{emodashCtrl.currentSessionDate}}
+                        </span>
+                        <br>
+                        <span>
+                            {{ 'emodash.html.section.sessiontimeline.text.description.1' | translate }}
+                        </span>
+                        <span class="word-note">&</span>
+                        <span class="underline-interactions">
+                            {{ 'emodash.html.section.sessiontimeline.text.interactions' | translate }}
+                        </span>
+                        <br>
+                        <span class="underline-happiness">{{ 'emodash.html.label.happiness' | translate }}</span> /
+                        <span class="underline-surprise">{{ 'emodash.html.label.surprise' | translate}}</span>
+                        <span class="word-note">VS</span>
+                        <span class="underline-fear">{{ 'emodash.html.label.fear' | translate }}</span> /
+                        <span class="underline-anger">{{ 'emodash.html.label.anger' | translate }}</span> /
+                        <span class="underline-sadness">{{ 'emodash.html.label.sadness' | translate }}</span> /
+                        <span class="underline-disgust">{{ 'emodash.html.label.disgust' | translate }}</span> /
+                        <span class="underline-contempt">{{ 'emodash.html.label.contempt' | translate }}</span>
+                    </div>
+                </div>
+
+                <div id="player-datasets-tooltip">
+                    <div id="tip-content"></div>
+                    <div id="actions">
+                        <md-button ng-click="emodashCtrl.closeThumbnail($event)" class="md-icon-button tooltip-button" aria-label="close">
+                            <md-icon md-svg-src="assets/icons/round-close-24px.svg"></md-icon>
+                        </md-button>
+                        <md-button ng-click="emodashCtrl.openOverlay($event)" class="md-icon-button tooltip-button" aria-label="open">
+                            <md-icon md-svg-src="assets/icons/round-open_in_browser-24px.svg"></md-icon>
+                        </md-button>
+                    </div>
+                </div>
+
+                <div class="player-tooltip-overlay overlay-hugeinc">
+                    <md-button ng-click="emodashCtrl.closeOverlay($event)" class="md-icon-button overlay-close" aria-label="close">
+                        <md-icon md-svg-src="assets/icons/round-close-24px.svg"></md-icon>
+                    </md-button>
+                    <div id="tip-content"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="md-whiteframe-z1 hack_report_header">
+
+            <div class="report_header_top" data-ng-hide="isNavigating">
+                <div class="report_header_stat">
+                    <span class="badge">{{markers.length}}</span> {{'TR_94'| translate}}
+                    <span class="label label-success fa fa-thumbs-up">{{nbPositiveMarkers}}</span>
+                    <span class="label label-danger fa fa-thumbs-down">{{nbNegativeMarkers}}</span>
+                </div>
+
+                <div class="report_togglemarker">
+                    <span translate>TR_61</span>
+                    <md-button data-ng-click="toggleMarkerView()" class="md-border md-accent md-default-theme {{bOnlyReportMarkers ? 'md-raised' : ''}}">
+                        {{'TR_60'| translate}} (
+                        <span data-translate="TR_57" translate-value-markercount="{{nbSelectedMarkers}}" translate-value-markermax="{{nbMarkersMax}}"></span>)
+                    </md-button>
+                </div>
+            </div>
+
+            <div style="min-height: 36px;" layout="column" layout-align="center center" ng-if="isNavigating">
+            </div>
+
+            <player ng-if="playerData" controller-as="player" src="playerData">
+                <md-tooltip md-direction="bottom">
+                    Disabled
+                </md-tooltip>
+                <!-- data-ng-click="addMarker()" -->
+                <md-button class="md-raised md-primary report_add_marker" data-ng-disabled="addingMarker || markerTimingEdited || isNavigating">
+                    <span data-ng-if="!addingMarker">
+                        <span>{{'TR_90'| translate}}</span>
+                        <span class="fa fa-plus"></span>
+                    </span>
+                    <span data-ng-if="addingMarker">
+                        <span class="fa fa-refresh fa-spin"></span>
+                        <span>{{'TR_93'| translate}}</span>
+                    </span>
+                </md-button>
+            </player>
+        </div>
+
+
+    </section>
+</div>

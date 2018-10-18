@@ -1,0 +1,27 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "./.eslintrc-node.json"    
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true,
+    "jquery": true
+  },
+  "plugins": [
+    "prettier",
+    "angular"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {}
+  },
+  "rules": {
+    "strict": 0
+  }
+}

@@ -1,0 +1,199 @@
+#emodash-survey-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-name: anim-open;
+    animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+    .emodash-survey-bottom-actions {
+        margin-top: 160px;
+        font-size: 20px;
+        .md-button {
+            font-size: 12px;
+        }
+        .separator {
+            background-color: #f4b400;
+            display: inline-block;
+            vertical-align: middle;
+            width: 4px;
+            height: 40px;
+        }
+    }
+    .cancel-btn {
+        color: #E57373;
+    }
+    .ok-btn {
+        color: #0091EA;
+    }
+}
+
+#abfe-container {
+    width: 100%;
+    display: flex;
+    @mixin column {
+        width: 50%;
+        min-height: 100vh;
+        padding: 5px;
+    }
+    @mixin no-select {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    @mixin visu-text-font {
+        font-size: 10px;
+        font-weight: 700;
+        text-align: center;
+    }
+    @mixin tooltip {
+        @include visu-text-font;
+        border-radius: 3px;
+        box-shadow: 0 0 5px #999;
+        background-color: #fff;
+        position: absolute;
+        text-align: left;
+        display: none;
+        max-width: 170px;
+        color: #000;
+        padding-bottom: 2px;
+        animation-duration: 0.4s;
+        animation-fill-mode: forwards;
+        animation-name: anim-open;
+        animation-timing-function: cubic-bezier(0.6, 0, 0.4, 1);
+        #tip-content {
+            padding: 5px;
+        }
+    }
+    @mixin tip-button ($c) {
+        background-color: $c;
+        border: none;
+        outline: none;
+        overflow: hidden;
+    }
+    .abfe-feedback {
+        @include column;
+    }
+    .abfe-emodash {
+        @include column;
+        @include no-select;
+    } // hacks for bilan
+    .hack_report_body {
+        margin: auto;
+        font-size: 0.9em;
+        font-weight: 400;
+    }
+    @mixin hack-error-icon {
+        float: left;
+        width: 20px;
+        text-align: center;
+        background: red;
+        color: white;
+        height: 150px;
+    }
+    .hack-error-icon {
+        @include hack-error-icon;
+        margin-left: -8px;
+    }
+    .hack-marker-error-icon {
+        @include hack-error-icon;
+        margin-left: -12px;
+    }
+    .hack_report_header {
+        background: #424242;
+        color: white;
+    }
+    .md-border {
+        border: 1px solid #eee;
+        border-radius: 2px;
+    }
+    $anger: #D50000;
+    $fear: #AA00FF;
+    $sadness: #00B8D4;
+    $contempt: #006064;
+    $happiness: #64DD17;
+    $surprise: #FF6D00;
+    $neutral: #2962FF;
+    $disgust: #212121;
+    $positive: #64DD17;
+    $negative: #D50000;
+    $interactions: #dcc96b; // first level overview
+    .flex-item-dash-overview {
+        display: flex;
+        flex-direction: column;
+        .flex-item {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            align-content: stretch;
+            .user-card {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                flex-direction: column;
+                .header {
+                    font-size: 1.0em;
+                    font-weight: 900;
+                    text-transform: uppercase;
+                    color: #333;
+                    text-align: center;
+                }
+                .user-card-media {
+                    padding: 20px;
+                    img,
+                    md-icon {
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                        border: 2px solid #4cc8f2;
+                    }
+                }
+                .user-card-detail {
+                    font-size: 0.8em;
+                    font-weight: 900;
+                    text-align: center;
+                    text-transform: capitalize;
+                }
+            }
+        }
+    } // end flex-item-dash-overview 
+    .flex-item-header {
+        text-align: center;
+        .subheader {
+            text-align: center;
+            span {
+                font-size: 11px;
+                font-weight: bold;
+                text-transform: uppercase;
+            }
+        }
+    } // end flex-item-header
+    
+    
+}
+
+.emodash-pulse-anim {
+    background: #eee;
+    box-shadow: 0 0 0 rgba(226, 181, 35, 0.4);
+    animation: pulse-anim 1.6s infinite;
+}
+
+@keyframes pulse-anim {
+    0% {
+        -moz-box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.4);
+    }
+    70% {
+        -moz-box-shadow: 0 0 0 20px rgba(76, 175, 80, 0);
+        box-shadow: 0 0 0 20px rgba(76, 175, 80, 0);
+    }
+    100% {
+        -moz-box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+    }
+}

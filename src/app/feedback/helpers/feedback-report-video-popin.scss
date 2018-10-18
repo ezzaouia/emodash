@@ -1,0 +1,10 @@
+@import './shared';
+body {
+    .video_popin {
+        @include flexbox;
+        @include align-items (center);
+        video {
+            max-width: 100%;
+        }
+    }
+}

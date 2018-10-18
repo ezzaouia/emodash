@@ -1,0 +1,33 @@
+<div class="section-body">
+    <div>
+        <h3>D3js Visualizations</h3>
+        <div class="newline"></div>
+    </div>
+
+    <div>
+        <h3>Radial Column Chart</h3>
+        <div class="impl-radial-column">
+            <radial-col-chart data="code.radialColChartData1" options="code.balanceChartOpts"></radial-col-chart>
+            <radial-col-chart data="code.radialColChartData2" options="code.radialColChartOpts"></radial-col-chart>
+            <radial-col-chart data="code.radialColChartData3" options="code.radialColChartOpts"></radial-col-chart>
+            <radial-col-chart data="code.radialColChartData4" options="code.radialColChartOpts"></radial-col-chart>
+        </div>
+        <md-divider></md-divider>
+    </div>
+
+    <div>
+        <h3>History view</h3>
+        <div class="impl-sessions-timeline">
+            <sessions-timeline-chart data="code.sessionsTlData" options="code.sessionsTlOptions"></sessions-timeline-chart>
+        </div>
+        <md-divider></md-divider>
+    </div>
+
+    <div>
+        <h3>Session view</h3>
+        <i>Video is blurred for privacy reasons</i>
+        <player ng-if="code.playerData" controller-as="player" src="code.playerData">
+        </player>
+    </div>
+
+</div>

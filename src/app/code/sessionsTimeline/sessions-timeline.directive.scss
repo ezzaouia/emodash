@@ -1,0 +1,75 @@
+#sessions-tl-chart-root {
+    #sessions-tl-chart-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    #sessions-tl-chart-svg {
+        margin-right: auto;
+        margin-left: auto;
+    }
+    #sessions-tl-brush-chart-svg {
+        box-shadow: 0 0 5px #999;
+        background-color: #fff;
+        right: 0;
+        position: absolute;
+    }
+    .sessions-tl-chart-progress {
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    .sessionsnav-polyline, .group-stlc-el-lc-polyline {
+        opacity: 0.3;
+    }
+    .group-stlc-el-lc-polyline-stroke {
+        stroke-width: 1.5;
+    }
+    .group-stlc-el-lc-polyline-label {
+        text-anchor: start;
+        font-size: 0.6em;
+        font-weight: 600;
+        font-style: italic;
+        text-anchor: middle;
+    }
+    .session-date-label,
+    .group-stlc-mbc-el-tl-label {
+        text-anchor: middle;
+        font-size: 0.6em;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .1em;
+        fill: #757575;
+    }
+    .rect-background-area {
+        fill: whitesmoke;
+    }
+    .multiline-chart-y-label {
+        text-anchor: end;
+        font-size: 0.5em;
+        font-weight: 300;
+        font-style: italic;
+    }
+    .sessionsnav-polyline-stroke {
+        stroke-width: 1.5;
+    }
+    .multiline-chart-y-label-mean-pos-val {
+        text-anchor: start;
+        font-size: 0.5em;
+        font-weight: 500;
+        font-style: italic;
+        fill: #64DD17;
+    }
+    .line-emotion {
+        stroke-width: 0.1;
+    }
+    .multiline-chart-y-label-mean-neg-val {
+        text-anchor: end;
+        font-size: 0.5em;
+        font-weight: 500;
+        font-style: italic;
+        fill: #D50000;
+    }
+    .pos-neg-dates-line {
+        position: absolute;
+    }
+}

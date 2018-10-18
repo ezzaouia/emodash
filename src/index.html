@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+  <base href="/test">
+  <style>
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+    }
+
+    .bubble {
+      animation: pulse 1s infinite;
+      -webkit-animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      25% {
+        transform: scale(2);
+      }
+      75% {
+        transform: scale(1);
+      }
+    }
+
+    @-webkit-keyframes pulse {
+      0% {
+        -webkit-transform: scale(1);
+      }
+      25% {
+        -webkit-transform: scale(2);
+      }
+      75% {
+        -webkit-transform: scale(1);
+      }
+    }
+  </style>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122322314-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-122322314-1');
+  </script>
+
+</head>
+
+<body>
+  <app>
+    <div class="loading bubble">
+      Loading... &#x2665;
+    </div>
+  </app>
+
+
+</body>
+
+</html>

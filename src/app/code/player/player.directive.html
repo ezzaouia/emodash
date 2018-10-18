@@ -1,0 +1,56 @@
+<div id="player-root">
+
+  <video id="client-stream" class="client-video-stream" ng-if="player.src.streamMetadata.Type == 'video'">
+    <source ng-if="player.src.streamMetadata.Type && player.src.streamMetadata.extension" src="{{player.src.streamURL}}" type="{{player.src.streamMetadata.Type}}/{{player.src.streamMetadata.extension}}">
+    <source ng-if="!player.src.streamMetadata.Type || !player.src.streamMetadata.extension" src="{{player.src.streamURL}}">
+  </video>
+
+  <section id="player" style="width: 10px;">
+    <div id="player-svg" ng-show="player.bShowPlayer"></div>
+    <div id="player-tooltip" ng-show="player.bShowPlayer"></div>
+  </section>
+
+  <section id="player-controls" layout="row" layout-align="center center" layout-wrap>
+
+    <md-button ng-if="(!player.isPlaying && !player.isWaiting)" class="md-fab md-mini play-btn" aria-label="play" ng-click="player.playerActions.play()">
+      <span class="fa fa-play"></span>
+    </md-button>
+
+    <md-button ng-if="(player.isPlaying && !player.isWaiting)" class="md-fab md-mini play-btn" aria-label="pause" ng-click="player.playerActions.pause()">
+      <span class="fa fa-pause"></span>
+    </md-button>
+
+    <md-button ng-if="player.isWaiting" class="md-fab md-mini play-btn" aria-label="buffering" ng-click="player.playerActions.pause()">
+      <span class="fa fa-spinner fa-spin"></span>
+    </md-button>
+
+    <div id="volume-control" ng-mouseenter="player.volumeControllMouseenter()" ng-mouseleave="player.volumeControllMouseleave()">
+      <div id="volume-control-btns">
+        <md-button class="md-fab md-mini volume-btn" aria-label="volume_off" ng-click="(player.volume === 0) ? player.playerActions.unmute() : player.playerActions.mute()">
+          <span aria-hidden="true" class="md-volume-icon">
+            <md-icon ng-if="(player.volume === 0)" md-svg-src="assets/icons/round-volume_off-24px.svg">
+            </md-icon>
+            <md-icon ng-if="(player.volume > 0 && player.volume < 0.5)" md-svg-src="assets/icons/round-volume_down-24px.svg">
+            </md-icon>
+            <md-icon ng-if="(player.volume >= 0.5)" md-svg-src="assets/icons/round-volume_up-24px.svg">
+            </md-icon>
+          </span>
+        </md-button>
+      </div>
+      <div id="volume-control-svg"></div>
+    </div>
+
+    <div id="time">
+      <span id="current-time"></span>/
+      <span id="duration"></span>
+    </div>
+
+    <ng-transclude></ng-transclude>
+  </section>
+
+  <!-- <audio id="client-stream" ng-if="player.src.streamMetadata.Type != 'video'">
+        <source ng-if="player.src.streamMetadata.Type && player.src.streamMetadata.extension" src="{{player.src.streamURL}}" type="{{player.src.streamMetadata.type}}/{{player.src.streamMetadata.extension}}">
+        <source ng-if="!player.src.streamMetadata.Type || !player.src.streamMetadata.extension" src="{{player.src.streamURL}}">
+    </audio> -->
+
+</div>

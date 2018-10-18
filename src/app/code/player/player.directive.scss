@@ -1,0 +1,184 @@
+@mixin no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#player-root {
+    $stroke-width: 3px; // initial stroke width of our player line
+    $volume-stroke-width: 3px; // initial stroke width of the volume line
+    $fa-icon-font-size: 24px;
+    $player-progress-color: #f12b24;
+    $player-volume-color: #cccccc;
+    $player-circle-r: 5;
+    display: flex;
+    flex-direction: column;
+    .g-player {
+        // TO CHANGE regarding our datasets config
+        .line-markers {
+            stroke-linecap: round;
+            stroke-width: 10;
+            cursor: pointer;
+        }
+        .dataset-inline {
+            stroke: #dcc96b;
+        }
+        .icon-markers {
+            font-family: FontAwesome;
+            font-size: $fa-icon-font-size;
+            opacity: .8;
+            cursor: pointer;
+        }
+        .cssselectorval {
+            cursor: pointer;
+        }
+        .rect-player-slider-bg {
+            fill: rgba(0, 0, 0, 0.5);
+        } // dataet label styles
+        .dataset-label {
+            text-anchor: center;
+            font-size: .7em;
+            font-weight: 700;
+            text-transform: capitalize;
+            letter-spacing: .1em;
+            fill: #555;
+        }
+        .track {
+            stroke: #777;
+            stroke-opacity: .2;
+            stroke-width: $stroke-width;
+        }
+        .vc-slider-track {
+            stroke: #777;
+            stroke-opacity: .2;
+            stroke-width: $volume-stroke-width;
+        }
+        .track-cursor {
+            stroke: #777;
+            stroke-opacity: .5;
+            stroke-width: $stroke-width;
+        }
+        .vc-slider-track-cursor {
+            stroke: #777;
+            stroke-opacity: .5;
+            stroke-width: $volume-stroke-width;
+        }
+        .track-buffer-progress {
+            stroke: #777;
+            stroke-opacity: .7;
+            stroke-width: $stroke-width;
+        }
+        .track-progress {
+            stroke: $player-progress-color;
+            stroke-width: $stroke-width;
+        }
+        .vc-slider-track-progress {
+            stroke: $player-volume-color;
+            stroke-width: $volume-stroke-width;
+        }
+        .track-overlay,
+        .vc-slider-track-overlay {
+            pointer-events: stroke;
+            stroke-width: 20px;
+        }
+        .slider-circle {
+            fill: $player-progress-color;
+            r: $player-circle-r;
+        }
+        .vc-slider-circle {
+            fill: $player-volume-color;
+            r: $player-circle-r;
+        }
+        .player-clickable {
+            cursor: pointer;
+        }
+        .player-not-clickable {
+            pointer-events: none;
+        }
+        .player-noselect {
+            @include no-select();
+        }
+        .player-debug-audio-buffer {
+            stroke-width: 20px;
+        }
+    } // play/pause etc.
+    #player-controls {
+        //padding-left: 60px;
+        //padding-right: 20px;
+        button.md-fab.play-btn {
+            background-color: #51addf;
+            border-color: #51addf;
+        }
+        button.md-fab.volume-btn {
+            background-color: #51addf;
+            border-color: #51addf;
+            transition: all 1s ease 0s;
+        }
+        #time {
+            margin-right: auto;
+            margin-left: 10px;
+        }
+    } // current time hover tooltip
+    #player-tooltip {
+        font-size: 10px;
+        border-radius: 3px;
+        box-shadow: 0 0 5px #999;
+        padding: 10px;
+        background-color: #fff;
+        color: black;
+        position: relative;
+        display: initial;
+        @include no-select();
+    }
+    &.dark-player {
+        // player & volume timeline styles
+        .track,
+        .track-buffer-progress,
+        .track-cursor,
+        .track-overlay,
+        .track-progress,
+        .vc-slider-track,
+        .vc-slider-track-cursor,
+        .vc-slider-track-overlay,
+        .vc-slider-track-progress {
+            // this value will be controlled from JS
+            mix-blend-mode: screen;
+        }
+    }
+    &.light-player {
+        // player & volume timeline styles
+        .track,
+        .track-buffer-progress,
+        .track-cursor,
+        .track-overlay,
+        .track-progress,
+        .vc-slider-track,
+        .vc-slider-track-cursor,
+        .vc-slider-track-overlay,
+        .vc-slider-track-progress {
+            // this value will be controlled from JS
+            mix-blend-mode: multiply;
+        }
+        #player-controls {
+            #time {
+                color: black;
+            }
+        }
+    }
+    .client-video-stream {
+        width: 640px;
+        max-width: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        margin: auto;
+    }
+    #volume-control {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+    }
+}

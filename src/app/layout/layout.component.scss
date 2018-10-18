@@ -1,0 +1,116 @@
+.header {
+    grid-area: header;
+}
+
+.sidebar {
+    grid-area: sidebar;
+}
+
+.content {
+    grid-area: content;
+    align-self: center;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: 14% auto;
+    grid-template-areas: "header header" "sidebar content" "sidebar footer";
+    .sidebar {
+        z-index: 100;
+        background-color: rgb(16, 108, 200);
+        height: 100vh;
+        position: fixed;
+        width: 14%;
+        .md-button {
+            width: 95%;
+            color: #fff;
+        }
+        .heading {
+            background-color: #106CC8;
+            background: -webkit-linear-gradient(#185694, #106cc8);
+            background: linear-gradient(#185694, #106cc8);
+            border-bottom: 1px solid #267ED5;
+            flex-shrink: 0;
+            z-index: 2;
+            a {
+                text-decoration: none;
+                font-weight: 400;
+                transition: border-bottom 0.35s;
+            }
+            .logo {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0 0 16px;
+                margin: 0 auto;
+            }
+            .logo>img {
+                height: 130px;
+                width: auto;
+                display: block;
+                transform-origin: 50% 0;
+                transform: scale(1.2);
+                border-radius: 50%;
+            }
+        }
+    }
+    .sidebar--item > * {
+        font-size: 12px;
+        font-weight: 550;
+    }
+    .header {
+        padding-bottom: 70px;
+        md-toolbar {
+            min-height: 48px;
+        }
+        .md-toolbar-tools {
+            max-height: 48px;
+        }
+    }
+    .content {
+        padding: 5px;
+        min-height: 100vh;
+        .state-progress {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+        }
+    }
+    .footer {
+        display: flex;
+        margin-top: 30px;
+        padding: 12px;
+        font-size: 14px;
+        background: #3f51b5;
+        align-items: center;
+        color: hsla(0, 0%, 100%, .87);
+        .logo {
+            justify-self: start;
+            img {
+                display: block;
+                transform-origin: 50% 0;
+                transform: scale(0.9);
+                border-radius: 50%;
+            }
+        }
+        .description {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+    .fixed-toolbar {
+        position: fixed;
+    }
+    .docs-toolbar-tools {
+        max-width: 864px;
+        padding: 0;
+        margin: 0 24px;
+        width: auto;
+    }
+}
