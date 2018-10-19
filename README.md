@@ -5,11 +5,11 @@ This repository contains supplemental material for the IJHCS paper Emodash: Supp
 ## Links referenced in the paper
 
 - DATA
-[See online demo](http://cscw18-emodash-sub1249.surge.sh/#) > DATA section in the menu.
+[See online demo](http://emodash.surge.sh/#) > DATA section in the menu.
 - SETUP
-[See online demo](http://cscw18-emodash-sub1249.surge.sh/#) > SETUP section in the menu.
+[See online demo](http://emodash.surge.sh/#) > SETUP section in the menu.
 - STATS
-[See online demo](http://cscw18-emodash-sub1249.surge.sh/#) > STATISTICAL ANALYSIS section in the menu.
+[See online demo](http://emodash.surge.sh/#) > STATISTICAL ANALYSIS section in the menu.
 
 ## Abstract
 
@@ -28,5 +28,5 @@ We present Emodash, an interactive dashboard for visualizing learners’ emotion
 5. Visualizing learners’ emotions led to an increase in tutors self-awareness and reflection.
 
 ## Maintainer
-This repository is maintained by [Mohamed Ezzaouia](https://github.com/ezzaouia).
+This repository is maintained by [Mohamed Ezzaouia](mailto:ezzaouia.mohamed@gmail.com).
 
