@@ -1,6 +1,6 @@
-# Emodash: Supporting Emotion Retrospective Awareness in Online Learning
+# Emodash: Supporting Retrospective Awareness of Emotions in Online Learning
 
-This repository contains supplemental material for the IJHCS paper Emodash: Supporting Emotion Retrospective Awareness in Online Learning by Mohamed Ezzaouia (University of Lyon, LIRIS), Aurélien Tabard (University of Lyon, LIRIS), Elise Lavoué (IAE Lyon,University of Lyon, LIRIS).
+This repository contains supplemental material for the IJHCS paper Emodash: Supporting Retrospective Awareness of Emotions in Online Learning by Mohamed Ezzaouia (University of Lyon, LIRIS), Aurélien Tabard (University of Lyon, LIRIS), Elise Lavoué (IAE Lyon,University of Lyon, LIRIS).
 
 ## Links referenced in the paper
 
