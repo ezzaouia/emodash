@@ -7,47 +7,50 @@ import './layout.component.scss';
 
 const allSessionsInfo = require('../code/common/sessions_info.json');
 
-
 class LayoutController {
+    constructor($log, $state, $stateParams, $rootScope, $timeout) {
+        'ngInject';
 
-  constructor($log, $state, $stateParams, $rootScope, $timeout) {
-    'ngInject';
+        $log.debug('LayoutController');
+        this.$state = $state;
+        this.$log = $log;
+        this.$rootScope = $rootScope;
+        this.$timeout = $timeout;
 
-    $log.debug('LayoutController');
-    this.$state = $state;
-    this.$log = $log;
-    this.$rootScope = $rootScope;
-    this.$timeout = $timeout;
+        this.sidebarItems = [
+            'demo',
+            'setup',
+            'data',
+            'design',
+            'visualizations',
+            'emodash',
+            'statistical analysis',
+            'think-aloud',
+        ];
 
-    this.sidebarItems = ['demo', 'setup', 'data', 'design', 'visualizations', 'emodash', 'statistical analysis'];
+        this.section = _.replace($state.$current.name, 'layout.', '');
+        this.sessionsInfo = allSessionsInfo;
+        this.coach = '';
+    }
 
-    this.section = _.replace($state.$current.name, 'layout.', '');
-    this.sessionsInfo = allSessionsInfo;
-    this.coach = '';
-  }
+    uiSref(section) {
+        this.isStateChangeStart = true;
+        this.$timeout(() => {
+            this.isStateChangeStart = false;
+            this.$state.go('layout.' + section);
+        }, 1500);
+    }
 
-  uiSref(section) {
-    this.isStateChangeStart = true;
-    this.$timeout(() => {
-      this.isStateChangeStart = false;
-      this.$state.go('layout.' + section);
-    }, 1500);
-  }
-
-  $onInit() {
-    this.uiSref('demo');
-  }
-
-
-
+    $onInit() {
+        this.uiSref('demo');
+    }
 }
 
 const LayoutComponent = {
-  template,
-  restricted: 'E',
-  controllerAs: 'layout',
-  controller: LayoutController,
+    template,
+    restricted: 'E',
+    controllerAs: 'layout',
+    controller: LayoutController,
 };
 
-export default module('app.layout', [])
-  .component('layout', LayoutComponent);
+export default module('app.layout', []).component('layout', LayoutComponent);
