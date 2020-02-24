@@ -2,6 +2,23 @@
 
 This repository contains supplemental material for the paper Emodash: Supporting Retrospective Awareness of Emotions in Online Learning by Mohamed Ez-zaouia (IAE Lyon, University of Lyon, LIRIS), Aurélien Tabard (University of Lyon, LIRIS), Elise Lavoué (IAE Lyon, University of Lyon, LIRIS).
 
+## Cite
+
+```
+@article{Ezzaouia2020IJHCSEmodash,
+    title = "Emodash: A dashboard supporting retrospective awareness of emotions in online learning",
+    journal = "International Journal of Human-Computer Studies",
+    volume = "139",
+    pages = "102411",
+    year = "2020",
+    issn = "1071-5819",
+    doi = "https://doi.org/10.1016/j.ijhcs.2020.102411",
+    url = "http://www.sciencedirect.com/science/article/pii/S1071581918305585",
+    author = "Mohamed Ez-zaouia and Aurélien Tabard and Elise Lavoué",
+    keywords = "Visualization, Dashboard, Awareness, Emotion, Online learning, Feedback"
+}
+```
+
 ## Abstract
 
 <img src="emodash-overview.png" title="Emodash overview with different design explorations"  alt="Emodash overview with different design explorations" style="width: 100%;"/>
