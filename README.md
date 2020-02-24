@@ -19,6 +19,8 @@ We present Emodash, an interactive dashboard supporting tutors’ retrospective 
 
 <img src="effect-size.png" title="The effect size of Category’s levels under with-without conditions with the associated confidence intervals"  alt="The effect size of Category’s levels under with-without conditions with the associated confidence intervals" style="width: 100%;"/>
 
+**Figure**: The effect size of Category’s levels under with-without conditions with the associated confidence intervals.
+
 ## Maintainer
 This repository is maintained by [Mohamed Ez-zaouia](mailto:ezzaouia.mohamed@gmail.com).
 
