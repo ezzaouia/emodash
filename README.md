@@ -2,7 +2,7 @@
 
 This repository contains supplemental material for the paper Emodash: Supporting Retrospective Awareness of Emotions in Online Learning by Mohamed Ez-zaouia (IAE Lyon, University of Lyon, LIRIS), Aurélien Tabard (University of Lyon, LIRIS), Elise Lavoué (IAE Lyon, University of Lyon, LIRIS).
 
-## Cite
+## BibTex
 
 ```
 @article{Ezzaouia2020IJHCSEmodash,
