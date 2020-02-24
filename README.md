@@ -2,18 +2,9 @@
 
 This repository contains supplemental material for the paper Emodash: Supporting Retrospective Awareness of Emotions in Online Learning by Mohamed Ez-zaouia (IAE Lyon, University of Lyon, LIRIS), Aurélien Tabard (University of Lyon, LIRIS), Elise Lavoué (IAE Lyon, University of Lyon, LIRIS).
 
-## Links referenced in the paper
-
-- DATA
-[See online demo](http://emodash.surge.sh/#) > DATA section in the menu.
-- SETUP
-[See online demo](http://emodash.surge.sh/#) > SETUP section in the menu.
-- STATS
-[See online demo](http://emodash.surge.sh/#) > STATISTICAL ANALYSIS section in the menu.
-
 ## Abstract
 
-<img src="emodash-overview.jpg" title="Emodash overview with different design explorations"  alt="Emodash overview with different design explorations" style="width: 100%;"/>
+<img src="emodash-overview.png" title="Emodash overview with different design explorations"  alt="Emodash overview with different design explorations" style="width: 100%;"/>
 
 **Figure**: Emodash overview with different design explorations.
 
